@@ -1,0 +1,16 @@
+<div style="background: #ECECEC;padding:30px;">
+  <nz-card style="width:200px;" [nzBordered]="false" nzTitle="Card title" [nzActions]="[actionEdit]">
+    <p>Card content</p>
+    <p>Card content</p>
+    <p>Card content</p>
+  </nz-card>
+</div>
+<ng-template #actionEdit>
+  <i nz-icon type="edit" (click)="showModal()"></i>
+</ng-template>
+
+<nz-modal [(nzVisible)]="isVisible" nzTitle="The first Modal" (nzOnCancel)="handleCancel()" (nzOnOk)="handleOk()">
+  <p>Content one</p>
+  <p>Content two</p>
+  <p>Content three</p>
+</nz-modal>
