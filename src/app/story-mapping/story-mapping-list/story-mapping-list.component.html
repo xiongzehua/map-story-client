@@ -1,0 +1,9 @@
+<nz-list [nzDataSource]="storyMappings" nzBordered
+         [nzHeader]="'我的 story-mappings'" [nzFooter]="'Footer'"
+         [nzRenderItem]="item">
+  <ng-template #item let-item >
+    <nz-list-item>
+      <a routerLink="/storymapping/edit/:{{item.id}}">{{item.name}}</a>
+    </nz-list-item>
+  </ng-template>
+</nz-list>

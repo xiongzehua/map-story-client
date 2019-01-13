@@ -9,12 +9,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
-import { CardComponent } from './map/card/card.component';
-import { StoryMappingListComponent } from './map/map-list/story-mapping-list.component';
-import { StoryMappingComponent } from './map/story-mapping.component';
 import { UserComponent } from './user/user.component';
-import { StoryMappingEditComponent } from './map/story-mapping-edit/story-mapping-edit.component';
-import { StoryMappingManageComponent } from './map/map-manage/story-mapping-manage.component';
+import {StoryMappingListComponent} from './story-mapping/story-mapping-list/story-mapping-list.component';
+import {StoryMappingEditComponent} from './story-mapping/story-mapping-edit/story-mapping-edit.component';
+import {StoryMappingManageComponent} from './story-mapping/story-mapping-manage/story-mapping-manage.component';
+import {CardComponent} from './story-mapping/card/card.component';
 
 registerLocaleData(en);
 
@@ -23,7 +22,6 @@ registerLocaleData(en);
     AppComponent,
     CardComponent,
     StoryMappingListComponent,
-    StoryMappingComponent,
     UserComponent,
     StoryMappingEditComponent,
     StoryMappingManageComponent

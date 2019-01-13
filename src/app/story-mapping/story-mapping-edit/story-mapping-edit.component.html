@@ -5,7 +5,7 @@
 
         <nz-breadcrumb style="line-height: 64px;">
           <nz-breadcrumb-item>
-            <a routerLink="/map/list">maps</a>
+            <a routerLink="/storymapping/list">maps</a>
           </nz-breadcrumb-item>
           <nz-breadcrumb-item>
             <a>具体map</a>
@@ -15,11 +15,23 @@
       </li>
     </div>
     <div nz-col nzSpan="2" nzOffset="12">
-      <li nz-menu-item routerLink="/map/edit/1"> 编辑</li>
+      <li nz-menu-item routerLink="/storymapping/edit/1"> 编辑</li>
     </div>
     <div nz-col nzSpan="2">
-      <li nz-menu-item routerLink="/map/manage/1"> 管理</li>
+      <li nz-menu-item routerLink="/storymapping/manage/1"> 管理</li>
     </div>
   </div>
 </ul>
-<router-outlet>
+
+<div class="box">
+  <div *ngFor="let card of cards;">
+    <app-card [card]="card"></app-card>
+  </div>
+  <button nz-button nzType="primary" (click)="addCard()">添加</button>
+</div>
+<div id="container">
+  assadasd
+</div>
+
+
+

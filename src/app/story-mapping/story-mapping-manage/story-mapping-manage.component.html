@@ -1,0 +1,30 @@
+<ul nz-menu [nzMode]="'horizontal'" style="line-height: 64px;">
+  <div nz-row>
+    <div nz-col nzSpan="8">
+      <li nz-menu-item>
+
+        <nz-breadcrumb style="line-height: 64px;">
+          <nz-breadcrumb-item>
+            <a routerLink="/storymapping/list">maps</a>
+          </nz-breadcrumb-item>
+          <nz-breadcrumb-item>
+            <a>具体map</a>
+          </nz-breadcrumb-item>
+        </nz-breadcrumb>
+
+      </li>
+    </div>
+    <div nz-col nzSpan="2" nzOffset="12">
+      <li nz-menu-item routerLink="/storymapping/edit/1"> 编辑</li>
+    </div>
+    <div nz-col nzSpan="2">
+      <li nz-menu-item routerLink="/storymapping/manage/1"> 管理</li>
+    </div>
+  </div>
+</ul>
+
+<div>
+  TODO
+  <li>添加协作者</li>
+  <li>删除协作者</li>
+</div>
