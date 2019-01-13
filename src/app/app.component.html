@@ -1,1 +1,20 @@
-<app-main></app-main>
+<nz-layout class="layout">
+  <nz-header>
+    <div class="logo"></div>
+    <ul nz-row nz-menu [nzTheme]="'dark'" [nzMode]="'horizontal'" style="line-height: 64px;">
+      <div nz-col nzSpan="3">
+        <li nz-menu-item routerLink="">Map</li>
+      </div>
+      <div nz-col nzSpan="3">
+        <li nz-menu-item routerLink="/user">个人中心</li>
+      </div>
+      <div nz-col nzOffset="15" nzSpan="3">
+        <li nz-menu-item routerLink="/user">登陆/注册</li>
+      </div>
+    </ul>
+  </nz-header>
+  <nz-content style="padding:0 50px;">
+    <router-outlet></router-outlet>
+  </nz-content>
+  <nz-footer style="text-align: center;">Map Story ©2018</nz-footer>
+</nz-layout>

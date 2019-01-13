@@ -1,8 +1,6 @@
 <div style="background: #ECECEC;padding:30px;">
-  <nz-card style="width:200px;" [nzBordered]="false" nzTitle="Card title" [nzActions]="[actionEdit]">
-    <p>Card content</p>
-    <p>Card content</p>
-    <p>Card content</p>
+  <nz-card style="width:200px;" [nzBordered]="false" [nzActions]="[actionEdit]">
+    {{card.content}}
   </nz-card>
 </div>
 <ng-template #actionEdit>

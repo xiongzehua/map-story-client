@@ -9,18 +9,24 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
-import { EditComponent } from './edit/edit.component';
-import { MainComponent } from './main/main.component';
-import { CardComponent } from './edit/card/card.component';
+import { CardComponent } from './map/card/card.component';
+import { StoryMappingListComponent } from './map/map-list/story-mapping-list.component';
+import { StoryMappingComponent } from './map/story-mapping.component';
+import { UserComponent } from './user/user.component';
+import { StoryMappingEditComponent } from './map/story-mapping-edit/story-mapping-edit.component';
+import { StoryMappingManageComponent } from './map/map-manage/story-mapping-manage.component';
 
 registerLocaleData(en);
 
 @NgModule({
   declarations: [
     AppComponent,
-    EditComponent,
-    MainComponent,
-    CardComponent
+    CardComponent,
+    StoryMappingListComponent,
+    StoryMappingComponent,
+    UserComponent,
+    StoryMappingEditComponent,
+    StoryMappingManageComponent
   ],
   imports: [
     BrowserModule,

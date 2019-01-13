@@ -1,0 +1,20 @@
+<nz-breadcrumb style="line-height: 64px;">
+  <nz-breadcrumb-item>
+    <a routerLink="/maps">maps</a>
+  </nz-breadcrumb-item>
+</nz-breadcrumb>
+
+<nz-list [nzDataSource]="data" [nzRenderItem]="item" [nzItemLayout]="'horizontal'" [nzLoading]="loading">
+  <ng-template #item let-item>
+    <nz-list-item>
+      <nz-list-item-meta
+        [nzTitle]="nzTitle"
+        nzAvatar="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+        nzDescription="{{item.title}}">
+        <ng-template #nzTitle>
+          <a routerLink="/map/edit/{{item.id}}">{{item.title}}</a>
+        </ng-template>
+      </nz-list-item-meta>
+    </nz-list-item>
+  </ng-template>
+</nz-list>
