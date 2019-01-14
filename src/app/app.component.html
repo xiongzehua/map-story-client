@@ -1,15 +1,15 @@
 <nz-layout class="layout">
   <nz-header>
     <div class="logo"></div>
-    <ul nz-row nz-menu [nzTheme]="'dark'" [nzMode]="'horizontal'" style="line-height: 64px;">
-      <div nz-col nzSpan="3">
+    <ul nz-row nz-menu [nzTheme]="'dark'" [nzMode]="'horizontal'" style="line-height: 64px; text-align: center; ">
+      <div nz-col nzSpan="2">
         <li nz-menu-item routerLink="">Map</li>
       </div>
-      <div nz-col nzSpan="3">
+      <div *ngIf="!this.userService.isAnonymous" nz-col nzOffset="20" nzSpan="2" >
         <li nz-menu-item routerLink="/user">个人中心</li>
       </div>
-      <div nz-col nzOffset="15" nzSpan="3">
-        <li nz-menu-item routerLink="/user">登陆/注册</li>
+      <div *ngIf="this.userService.isAnonymous" nz-col nzOffset="20" nzSpan="2">
+        <li nz-menu-item (click)="showLoginModal()">登陆/注册</li>
       </div>
     </ul>
   </nz-header>
@@ -18,3 +18,20 @@
   </nz-content>
   <nz-footer style="text-align: center;">Story Mapping ©2018</nz-footer>
 </nz-layout>
+
+<nz-modal
+  [(nzVisible)]="this.userService.showLoginRegister"
+  nzWrapClassName="vertical-center-modal"
+  [nzTitle]="loginModalTitle" 
+  [nzContent]="loginModalContent"
+  [nzFooter]="null" 
+  (nzOnCancel)="loginCancel()">
+  <ng-template #loginModalTitle>
+    注册/登录
+  </ng-template>
+
+  <ng-template #loginModalContent>
+    <app-login-register></app-login-register>
+  </ng-template>
+  
+</nz-modal>
