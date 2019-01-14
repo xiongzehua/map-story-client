@@ -1,0 +1,99 @@
+<!-- 登录 -->
+<div *ngIf="showLogin" >
+  <form 
+    nz-form 
+    [formGroup]="validateLoginForm"
+    class="login-form"
+    (ngSubmit)="submitLoginForm()">
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group [nzPrefix]="prefixUser">
+          <input type="text" nz-input id="username" formControlName="username" placeholder="用户名" [(ngModel)]="this.user.username" name="username">
+        </nz-input-group>
+        <nz-form-explain *ngIf="validateLoginForm.get('username').dirty && validateLoginForm.get('username').errors">请输入正确的用户名！</nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group [nzPrefix]="prefixLock">
+          <input type="password" nz-input id="password" formControlName="password" placeholder="密码" minlength="6" [(ngModel)]="this.user.password" name="password">
+        </nz-input-group>
+        <nz-form-explain *ngIf="validateLoginForm.get('password').dirty && validateLoginForm.get('password').errors">
+          <ng-container *ngIf="validateLoginForm.get('password').hasError('required')">
+            请输入正确的密码！
+          </ng-container>
+          <ng-container *ngIf="validateLoginForm.get('password').hasError('minlength')">
+            密码最少6个字符
+          </ng-container>
+        </nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <label nz-checkbox formControlName="remember">
+          <span>记住我</span>
+        </label>
+        <a class="login-form-forgot" class="login-form-forgot">忘记密码</a>
+        <button nz-button class="login-form-button" [nzType]="'primary'">登录</button>
+        <a (click)="toRegister()">还没有账号，现在去注册</a>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</div>
+
+<!-- 注册 -->
+<div *ngIf="!showLogin" >
+  <form 
+    nz-form 
+    [formGroup]="validateRegisterForm"
+    class="login-form"
+    (ngSubmit)="submitRegisterForm()">
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group [nzPrefix]="prefixUser">
+          <input type="text" nz-input id="username" formControlName="username" placeholder="用户名" [(ngModel)]="this.user.username" name="username">
+        </nz-input-group>
+        <nz-form-explain *ngIf="validateRegisterForm.get('username').dirty && validateRegisterForm.get('username').errors">请输入正确的用户名！</nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group [nzPrefix]="prefixLock">
+          <input type="password" nz-input id="password" formControlName="password" placeholder="密码" minlength="6" [(ngModel)]="this.user.password" name="password">
+        </nz-input-group>
+        <nz-form-explain *ngIf="validateRegisterForm.get('password').dirty && validateRegisterForm.get('password').errors">
+          <ng-container *ngIf="validateRegisterForm.get('password').hasError('required')">
+            请输入正确的密码！
+          </ng-container>
+          <ng-container *ngIf="validateRegisterForm.get('password').hasError('minlength')">
+            密码最少6个字符
+          </ng-container>
+        </nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group [nzPrefix]="prefixLock">
+          <input type="password" nz-input id="checkPassword" formControlName="checkPassword" placeholder="确认密码">
+        </nz-input-group>
+        <nz-form-explain *ngIf="validateRegisterForm.get('checkPassword').dirty && validateRegisterForm.get('checkPassword').errors">
+            <ng-container *ngIf="validateRegisterForm.get('checkPassword').hasError('required')">
+              请输入正确的密码！
+            </ng-container>
+            <ng-container *ngIf="validateRegisterForm.get('checkPassword').hasError('confirm')">
+              两次输入密码不一致
+            </ng-container>
+          </nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <button nz-button class="login-form-button" [nzType]="'primary'">注册</button>
+        <a (click)="toLogin()">已有账号，现在去登录</a>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+  </div>
+
+<ng-template #prefixUser><i nz-icon type="user"></i></ng-template>
+<ng-template #prefixLock><i nz-icon type="lock"></i></ng-template>

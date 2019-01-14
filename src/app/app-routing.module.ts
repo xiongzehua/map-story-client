@@ -4,6 +4,7 @@ import {UserComponent} from './user/user.component';
 import {StoryMappingEditComponent} from './story-mapping/story-mapping-edit/story-mapping-edit.component';
 import {StoryMappingManageComponent} from './story-mapping/story-mapping-manage/story-mapping-manage.component';
 import {StoryMappingListComponent} from './story-mapping/story-mapping-list/story-mapping-list.component';
+import { LoginComponent } from './user/login-register/login-register.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path: 'user',
     component: UserComponent
+  },
+  {
+    path: 'login-register',
+    component: LoginComponent
   },
   {
     path: '',

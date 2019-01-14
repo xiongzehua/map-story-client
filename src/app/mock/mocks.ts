@@ -1,4 +1,4 @@
-import {Card, StoryMapping} from '../model/entities';
+import {Card, StoryMapping, User} from '../model/entities';
 
 export const storyMappings: StoryMapping[] = [
   {id: 1, name: '项目1'},
@@ -15,3 +15,9 @@ export const cards: Card[] = [
   {id: 5, content: '卡片5 最多20个字字字字字字字字字字字字字字字字字字'},
   {id: 6, content: '卡片6 最多20个字字字字字字字字字字字字字字字字字字'},
 ];
+
+export const user: User = {
+  id: 1,
+  username: "Yobol",
+  password: "123456"
+}
