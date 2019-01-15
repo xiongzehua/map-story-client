@@ -10,7 +10,7 @@ export class AppComponent {
   title = 'map-story-client';
 
   constructor(
-    private userService: UserService,
+    public userService: UserService,
   ) { }
 
   showLoginModal(): void {

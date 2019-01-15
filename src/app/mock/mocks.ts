@@ -18,6 +18,6 @@ export const cards: Card[] = [
 
 export const user: User = {
   id: 1,
-  username: "Yobol",
-  password: "123456"
+  username: 'Yobol',
+  password: '123456'
 }
