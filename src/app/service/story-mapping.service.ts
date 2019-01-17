@@ -10,7 +10,7 @@ export class StoryMappingService {
   listStoryMapping(): Observable<StoryMapping[]> {
     return of(storyMappings);
   }
-  listCard(storyMappingId: number): Observable<Card[]> {
+  getCards(storyMappingId: number): Observable<Card[][]> {
     return of(cards);
   }
   constructor() { }

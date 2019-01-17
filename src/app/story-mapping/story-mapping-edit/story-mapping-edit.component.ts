@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import * as Konva from 'konva';
 import {Card} from '../../model/entities';
 import {StoryMappingService} from '../../service/story-mapping.service';
 
@@ -9,7 +8,7 @@ import {StoryMappingService} from '../../service/story-mapping.service';
   styleUrls: ['./story-mapping-edit.component.less']
 })
 export class StoryMappingEditComponent implements OnInit {
-  cards: Card[];
+  cards: Card[][];
   constructor(
     private storyMappingService: StoryMappingService,
   ) { }
@@ -18,16 +17,28 @@ export class StoryMappingEditComponent implements OnInit {
     this.listCard();
   }
   listCard() {
-    this.storyMappingService.listCard(1).subscribe(
+    this.storyMappingService.getCards(1).subscribe(
       items => {
         this.cards = items;
       }
     );
   }
-  addCard() {
-    this.cards.push({
+  addCardToRelease(release: Card[]) {
+    release.push({
       id: 10,
       content: '这是添加的顶顶顶顶顶顶'
     });
+  }
+  addRelease() {
+    this.cards.push([]);
+  }
+  getReleaseInfo(index: number) {
+    if (index === 0) {
+      return 'User activities';
+    } else if (index === 1) {
+      return 'User tasks';
+    } else {
+      return `User stories Release${index - 1}`;
+    }
   }
 }

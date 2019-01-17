@@ -23,15 +23,24 @@
   </div>
 </ul>
 
-<div class="box">
-  <div *ngFor="let card of cards;">
-    <app-card [card]="card"></app-card>
+<div *ngFor="let release of cards; let i = index;">
+  <nz-divider nzText="{{getReleaseInfo(i)}}"></nz-divider>
+
+  <div class="container">
+    <div *ngFor="let card of release;" class="item">
+      <app-card [card]="card"></app-card>
+    </div>
+    <div style="padding:10px;">
+      <nz-card style="width:200px; height: 100px" [nzBordered]="false" (click)="addCardToRelease(release)">
+        <i nz-icon type="plus" style="margin-left: 50px; font-size: 50px;"></i>
+      </nz-card>
+    </div>
   </div>
-  <button nz-button nzType="primary" (click)="addCard()">添加</button>
-</div>
-<div id="container">
-  assadasd
 </div>
 
-
+<nz-divider [nzText]="text">
+  <ng-template #text>
+    <button nz-button nzType="primary" (click)="addRelease()">添加版本</button>
+  </ng-template>
+</nz-divider>
 
