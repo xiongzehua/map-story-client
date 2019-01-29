@@ -13,7 +13,6 @@ import { UserComponent } from './user/user.component';
 import {StoryMappingListComponent} from './story-mapping/story-mapping-list/story-mapping-list.component';
 import {StoryMappingEditComponent} from './story-mapping/story-mapping-edit/story-mapping-edit.component';
 import {StoryMappingManageComponent} from './story-mapping/story-mapping-manage/story-mapping-manage.component';
-import {CardComponent} from './story-mapping/card/card.component';
 import { LoginComponent } from './user/login-register/login-register.component';
 
 registerLocaleData(en);
@@ -21,7 +20,6 @@ registerLocaleData(en);
 @NgModule({
   declarations: [
     AppComponent,
-    CardComponent,
     StoryMappingListComponent,
     UserComponent,
     StoryMappingEditComponent,

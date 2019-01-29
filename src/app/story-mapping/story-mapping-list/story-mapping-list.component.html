@@ -1,3 +1,18 @@
+<ul nz-menu [nzMode]="'horizontal'" style="line-height: 64px;">
+  <div nz-row>
+    <div nz-col nzSpan="8">
+      <li nz-menu-item>
+        <nz-breadcrumb style="line-height: 64px;">
+          <nz-breadcrumb-item>
+            <a routerLink="/storymapping/list">maps</a>
+          </nz-breadcrumb-item>
+        </nz-breadcrumb>
+      </li>
+    </div>
+  </div>
+</ul>
+
+
 <nz-list [nzDataSource]="storyMappings" nzBordered
          [nzHeader]="'我的 story-mappings'" [nzFooter]="'Footer'"
          [nzRenderItem]="item">

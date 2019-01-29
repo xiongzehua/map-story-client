@@ -2,7 +2,6 @@
   <div nz-row>
     <div nz-col nzSpan="8">
       <li nz-menu-item>
-
         <nz-breadcrumb style="line-height: 64px;">
           <nz-breadcrumb-item>
             <a routerLink="/storymapping/list">maps</a>
@@ -11,7 +10,6 @@
             <a>具体map</a>
           </nz-breadcrumb-item>
         </nz-breadcrumb>
-
       </li>
     </div>
     <div nz-col nzSpan="2" nzOffset="12">
@@ -23,24 +21,61 @@
   </div>
 </ul>
 
-<div *ngFor="let release of cards; let i = index;">
-  <nz-divider nzText="{{getReleaseInfo(i)}}"></nz-divider>
 
-  <div class="container">
-    <div *ngFor="let card of release;" class="item">
-      <app-card [card]="card"></app-card>
-    </div>
-    <div style="padding:10px;">
-      <nz-card style="width:200px; height: 100px" [nzBordered]="false" (click)="addCardToRelease(release)">
-        <i nz-icon type="plus" style="margin-left: 50px; font-size: 50px;"></i>
+
+<div *ngFor="let release of cards; let i = index;">
+  <div class="release">
+    <!--版本分割线-->
+    <nz-divider nzText="{{getReleaseInfo(i)}}"></nz-divider>
+
+    <!--卡片列表-->
+    <div *ngFor="let card of release; let j = index;">
+      <nz-card [nzBordered]="false" (click)="showEditCardModal(i, j)">
+        {{getContentInfo(card.content)}}
       </nz-card>
     </div>
+
+    <!--添加按钮-->
+    <nz-card [nzBordered]="false" (click)="showAddCardModal(i)">
+      <i nz-icon type="plus" style="margin-left: 50px; font-size: 50px;"></i>
+    </nz-card>
   </div>
 </div>
+
+<nz-modal
+  [(nzVisible)]="editCardModalVisible"
+  nzTitle="修改卡片"
+  [nzFooter]="editCardModalFooter"
+  (nzOnCancel)="editCardCancel()"
+>
+  <textarea rows="2" nz-input [(ngModel)]="currentCard.content"></textarea>
+  <ng-template #editCardModalFooter>
+    <button nz-button nzType="default" (click)="editCardCancel()">取消</button>
+    <button nz-button nzType="danger" (click)="editCardDelete()">删除</button>
+    <button nz-button nzType="primary" (click)="editCardOk()">保存</button>
+  </ng-template>
+</nz-modal>
+
+<nz-modal
+  [(nzVisible)]="addCardModalVisible"
+  nzTitle="新增卡片"
+  [nzFooter]="addCardModalFooter"
+  (nzOnCancel)="addCardCancel()"
+  >
+  <textarea rows="3" nz-input [(ngModel)]="currentCard.content"></textarea>
+  <ng-template #addCardModalFooter>
+    <button nz-button nzType="default" (click)="addCardCancel()">取消</button>
+    <button nz-button nzType="primary" (click)="addCardOk()">保存</button>
+  </ng-template>
+</nz-modal>
 
 <nz-divider [nzText]="text">
   <ng-template #text>
     <button nz-button nzType="primary" (click)="addRelease()">添加版本</button>
   </ng-template>
 </nz-divider>
+
+<div style="font-size: 16px;">
+  {{ cards | json }}
+</div>
 

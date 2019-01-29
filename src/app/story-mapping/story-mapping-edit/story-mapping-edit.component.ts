@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Card} from '../../model/entities';
 import {StoryMappingService} from '../../service/story-mapping.service';
+import {NzModalService} from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-map-edit',
@@ -8,13 +9,64 @@ import {StoryMappingService} from '../../service/story-mapping.service';
   styleUrls: ['./story-mapping-edit.component.less']
 })
 export class StoryMappingEditComponent implements OnInit {
+  addCardModalVisible = false;
+  editCardModalVisible = false;
+  currentCard = {
+    i: -1,
+    j: -1,
+    content: '',
+  };
   cards: Card[][];
   constructor(
     private storyMappingService: StoryMappingService,
+    private modalService: NzModalService,
   ) { }
 
   ngOnInit() {
     this.listCard();
+  }
+
+  showEditCardModal(i: number, j: number): void {
+    this.currentCard.i = i;
+    this.currentCard.j = j;
+    this.currentCard.content = this.cards[i][j].content;
+    this.editCardModalVisible = true;
+  }
+  showAddCardModal(i: number): void {
+    this.currentCard.i = i;
+    this.currentCard.j = this.cards[i].length;
+    this.currentCard.content = '';
+    this.addCardModalVisible = true;
+  }
+  addCardOk(): void {
+    console.log('Button ok clicked!');
+    const newCard = {
+      content: this.currentCard.content,
+    };
+    this.cards[this.currentCard.i].push(newCard);
+    this.addCardModalVisible = false;
+  }
+
+  addCardCancel(): void {
+    console.log('Button cancel clicked!');
+    this.addCardModalVisible = false;
+  }
+
+  editCardOk(): void {
+    console.log('Button ok clicked!');
+    this.cards[this.currentCard.i][this.currentCard.j].content = this.currentCard.content;
+    this.editCardModalVisible = false;
+  }
+
+  editCardDelete(): void {
+    console.log('Button ok clicked!');
+    this.cards[this.currentCard.i].splice(this.currentCard.j, 1);
+    this.editCardModalVisible = false;
+  }
+
+  editCardCancel(): void {
+    console.log('Button cancel clicked!');
+    this.editCardModalVisible = false;
   }
   listCard() {
     this.storyMappingService.getCards(1).subscribe(
@@ -22,15 +74,6 @@ export class StoryMappingEditComponent implements OnInit {
         this.cards = items;
       }
     );
-  }
-  addCardToRelease(release: Card[]) {
-    release.push({
-      id: 10,
-      content: '这是添加的顶顶顶顶顶顶'
-    });
-  }
-  addRelease() {
-    this.cards.push([]);
   }
   getReleaseInfo(index: number) {
     if (index === 0) {
@@ -40,5 +83,15 @@ export class StoryMappingEditComponent implements OnInit {
     } else {
       return `User stories Release${index - 1}`;
     }
+  }
+
+  getContentInfo(content: string) {
+    if (content.length > 20) {
+      return content.substr(0, 19) + '...';
+    }
+    return content;
+  }
+  addRelease() {
+    this.cards.push([]);
   }
 }
