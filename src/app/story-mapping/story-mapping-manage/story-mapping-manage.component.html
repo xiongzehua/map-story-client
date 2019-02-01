@@ -8,17 +8,17 @@
             <a routerLink="/storymapping/list">maps</a>
           </nz-breadcrumb-item>
           <nz-breadcrumb-item>
-            <a>具体map</a>
+            <a>{{ currentStoryMapping.name }}</a>
           </nz-breadcrumb-item>
         </nz-breadcrumb>
 
       </li>
     </div>
     <div nz-col nzSpan="2" nzOffset="12">
-      <li nz-menu-item routerLink="/storymapping/edit/1"> 编辑</li>
+      <li nz-menu-item routerLink="/storymapping/edit/{{ currentStoryMapping.id }}"> 编辑</li>
     </div>
     <div nz-col nzSpan="2">
-      <li nz-menu-item routerLink="/storymapping/manage/1"> 管理</li>
+      <li nz-menu-item routerLink="/storymapping/manage/{{ currentStoryMapping.id }}"> 管理</li>
     </div>
   </div>
 </ul>

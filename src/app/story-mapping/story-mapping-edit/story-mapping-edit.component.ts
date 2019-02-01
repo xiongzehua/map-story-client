@@ -1,7 +1,8 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Card} from '../../model/entities';
+import {Card, StoryMapping} from '../../model/entities';
 import {StoryMappingService} from '../../service/story-mapping.service';
 import {NzModalService} from 'ng-zorro-antd';
+import { PlatformLocation } from '@angular/common';
 
 @Component({
   selector: 'app-map-edit',
@@ -9,6 +10,9 @@ import {NzModalService} from 'ng-zorro-antd';
   styleUrls: ['./story-mapping-edit.component.less']
 })
 export class StoryMappingEditComponent implements OnInit {
+
+  currentStoryMapping = null;
+
   addCardModalVisible = false;
   editCardModalVisible = false;
   currentCard = {
@@ -18,12 +22,24 @@ export class StoryMappingEditComponent implements OnInit {
   };
   cards: Card[][];
   constructor(
+    private location: PlatformLocation,
     private storyMappingService: StoryMappingService,
-    private modalService: NzModalService,
-  ) { }
+    private modalService: NzModalService
+  ) {
+   }
 
   ngOnInit() {
+    this.setCurrentStoryMapping(+this.location.pathname.split("/").pop());
     this.listCard();
+  }
+
+  setCurrentStoryMapping(id: number): void {
+    this.storyMappingService.currentStoryMapping(id).subscribe(
+      mapping => {
+        console.log(mapping);
+        this.currentStoryMapping = mapping;
+      }
+    );
   }
 
   showEditCardModal(i: number, j: number): void {

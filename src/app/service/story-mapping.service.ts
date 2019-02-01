@@ -7,6 +7,15 @@ import {cards, storyMappings} from '../mock/mocks';
   providedIn: 'root'
 })
 export class StoryMappingService {
+  
+  currentStoryMapping(storyMappingId: number): Observable<StoryMapping> {
+    for (let map of storyMappings) {
+      if (map.id == storyMappingId) {
+        return of(map);
+      }
+    }
+  }
+
   listStoryMapping(): Observable<StoryMapping[]> {
     return of(storyMappings);
   }
