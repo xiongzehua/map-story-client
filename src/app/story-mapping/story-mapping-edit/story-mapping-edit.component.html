@@ -7,16 +7,16 @@
             <a routerLink="/storymapping/list">maps</a>
           </nz-breadcrumb-item>
           <nz-breadcrumb-item>
-            <a >{{ currentStoryMapping.name }}</a>
+            <a >{{ projectService.getCurrentProject().name }}</a>
           </nz-breadcrumb-item>
         </nz-breadcrumb>
       </li>
     </div>
     <div nz-col nzSpan="2" nzOffset="12">
-      <li nz-menu-item routerLink="/storymapping/edit/{{ currentStoryMapping.id }}"> 编辑</li>
+      <li nz-menu-item routerLink="/storymapping/edit/{{ projectService.getCurrentProject().name }}"> 编辑</li>
     </div>
     <div nz-col nzSpan="2">
-      <li nz-menu-item routerLink="/storymapping/manage/{{ currentStoryMapping.id }}"> 管理</li>
+      <li nz-menu-item routerLink="/storymapping/manage/{{ projectService.currentProject.id }}"> 管理</li>
     </div>
   </div>
 </ul>
@@ -75,7 +75,7 @@
   </ng-template>
 </nz-divider>
 
-<div style="font-size: 16px;">
-  {{ cards | json }}
-</div>
+<!--<div style="font-size: 16px;">-->
+  <!--{{ cards | json }}-->
+<!--</div>-->
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {StoryMappingService} from '../../service/story-mapping.service';
-import {StoryMapping} from '../../model/entities';
+import {ProjectService} from '../../service/project.service';
+import {Project} from '../../model/entities';
 
 @Component({
   selector: 'app-map-list',
@@ -8,20 +8,34 @@ import {StoryMapping} from '../../model/entities';
   styleUrls: ['./story-mapping-list.component.less']
 })
 export class StoryMappingListComponent implements OnInit {
-  storyMappings: StoryMapping[];
+  addProjectModelVisible = false;
+  newProject: Project = {
+    name: '',
+    cards: [[]],
+  };
   constructor(
-    private storyMappingService: StoryMappingService,
+    public projectService: ProjectService,
   ) { }
 
   ngOnInit() {
-    this.listStoryMapping();
   }
-  listStoryMapping() {
-    return this.storyMappingService.listStoryMapping().subscribe(
-      items => {
-        this.storyMappings = items;
-      }
-    );
+
+  showAddProjectModel() {
+    this.newProject = {
+      name: '',
+      cards: [[]],
+    };
+    this.addProjectModelVisible = true;
+  }
+  addProjcetOk() {
+    this.projectService.addProject(this.newProject);
+    console.log(this.projectService);
+    console.log(this.projectService.listProject());
+    this.addProjectModelVisible = false;
+  }
+
+  addProjcetCancel() {
+    this.addProjectModelVisible = false;
   }
 
 }

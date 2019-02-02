@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { PlatformLocation } from '@angular/common';
-import { StoryMappingService } from 'src/app/service/story-mapping.service';
+import { ProjectService } from 'src/app/service/project.service';
 
 @Component({
   selector: 'app-map-manage',
@@ -13,7 +13,7 @@ export class StoryMappingManageComponent implements OnInit {
 
   constructor(
     private location: PlatformLocation,
-    private storyMappingService: StoryMappingService
+    private storyMappingService: ProjectService
   ) { }
 
   ngOnInit() {

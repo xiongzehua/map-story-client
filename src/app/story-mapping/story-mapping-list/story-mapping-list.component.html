@@ -12,13 +12,23 @@
   </div>
 </ul>
 
+<div *ngFor="let p of this.projectService.listProject();">
+  <div class="project">
+    <a routerLink="/storymapping/edit/{{p.id}}">{{p.name}}</a>
+  </div>
+</div>
 
-<nz-list [nzDataSource]="storyMappings" nzBordered
-         [nzHeader]="'我的 story-mappings'" [nzFooter]="'Footer'"
-         [nzRenderItem]="item">
-  <ng-template #item let-item >
-    <nz-list-item>
-      <a routerLink="/storymapping/edit/{{item.id}}">{{item.name}}</a>
-    </nz-list-item>
+<button nz-button nzType="primary" (click)="showAddProjectModel()" style="margin-top: 15px">新建项目</button>
+<nz-modal
+  [(nzVisible)]="addProjectModelVisible"
+  nzTitle="新建项目"
+  [nzFooter]="addProjcetModalFooter"
+  (nzOnCancel)="addProjcetCancel()"
+  >
+  <input nz-input placeholder="项目名" [(ngModel)]="newProject.name">
+  <ng-template #addProjcetModalFooter>
+    <button nz-button nzType="default" (click)="addProjcetCancel()">取消</button>
+    <button nz-button nzType="primary" (click)="addProjcetOk()">保存</button>
   </ng-template>
-</nz-list>
+</nz-modal>
+

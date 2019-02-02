@@ -1,5 +1,5 @@
-export class StoryMapping {
-  public id: number;
+export class Project {
+  public id?: number;
   public name: string;
   public cards: Card[][];
 }

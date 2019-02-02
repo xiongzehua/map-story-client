@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Card, StoryMapping} from '../../model/entities';
-import {StoryMappingService} from '../../service/story-mapping.service';
+import {Card, Project} from '../../model/entities';
+import {ProjectService} from '../../service/project.service';
 import {NzModalService} from 'ng-zorro-antd';
 import { PlatformLocation } from '@angular/common';
 
@@ -11,8 +11,6 @@ import { PlatformLocation } from '@angular/common';
 })
 export class StoryMappingEditComponent implements OnInit {
 
-  currentStoryMapping = null;
-
   addCardModalVisible = false;
   editCardModalVisible = false;
   currentCard = {
@@ -22,25 +20,25 @@ export class StoryMappingEditComponent implements OnInit {
   };
   cards: Card[][];
   constructor(
-    private location: PlatformLocation,
-    private storyMappingService: StoryMappingService,
-    private modalService: NzModalService
+    public projectService: ProjectService,
+    public location: PlatformLocation,
   ) {
    }
 
   ngOnInit() {
-    this.setCurrentStoryMapping(+this.location.pathname.split("/").pop());
-    this.listCard();
+    this.projectService.setCurrentProject(+this.location.pathname.split("/").pop());
+    this.cards = this.projectService.getCurrentProject().cards;
   }
 
-  setCurrentStoryMapping(id: number): void {
-    this.storyMappingService.currentStoryMapping(id).subscribe(
-      mapping => {
-        console.log(mapping);
-        this.currentStoryMapping = mapping;
-      }
-    );
-  }
+  // setCurrentStoryMapping(id: number): void {
+  //   this.projectService.currentStoryMapping(id).subscribe(
+  //     mapping => {
+  //       console.log(mapping);
+  //       this.currentStoryMapping = mapping;
+  //     }
+  //   );
+  //   this.projectService.currentStoryMapping(id).
+  // }
 
   showEditCardModal(i: number, j: number): void {
     this.currentCard.i = i;
@@ -83,13 +81,6 @@ export class StoryMappingEditComponent implements OnInit {
   editCardCancel(): void {
     console.log('Button cancel clicked!');
     this.editCardModalVisible = false;
-  }
-  listCard() {
-    this.storyMappingService.getCards(1).subscribe(
-      items => {
-        this.cards = items;
-      }
-    );
   }
   getReleaseInfo(index: number) {
     if (index === 0) {
