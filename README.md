@@ -1,31 +1,3 @@
-# MapStoryClient
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.0.6.
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
-
 ## api文档
 ##### 注册
 
@@ -127,7 +99,7 @@ response
 
 
 
-##### 获取项目数据
+##### 获取项目数据详情
 
 request
 
@@ -161,6 +133,7 @@ response
           
         	  }
         ],
+        "projectId": "项目id",
     	  "projectTitle": "项目题目",
     	  "projectContent": "项目说明",
     	  "projectCards": [ 
@@ -174,7 +147,7 @@ response
 
 
 ##### 更新项目数据
-
+"cards"后的内容不需要解析，就当成一个字符串
 request
 
 ```shell
@@ -203,3 +176,52 @@ response
 }
 ```
 
+##### 添加协作者
+
+request
+
+```shell
+POST /api/contributor/create
+```
+
+```json
+{
+    "userToken": "ae123asqere21asdsa3",
+    "projectId": 3,
+    "contributorId": 6
+}
+```
+
+response
+
+```json
+{
+    "status": 0, // 0-成功 -1失败 1-权限不够 2-格式非法 
+    "data": null
+}
+```
+
+##### 删除协作者
+
+request
+
+```shell
+POST /api/contributor/delete
+```
+
+```json
+{
+    "userToken": "ae123asqere21asdsa3",
+    "projectId": 3,
+    "contributorId": 6
+}
+```
+
+response
+
+```json
+{
+    "status": 0, // 0-成功 -1失败 1-权限不够 2-格式非法 
+    "data": null
+}
+```
