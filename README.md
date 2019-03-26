@@ -60,7 +60,46 @@ response
 }
 ```
 
+##### 创建项目
+request
 
+```shell
+POST /api/project/create
+```
+```json
+{
+    "userToken": "ae123asqere21asdsa3",
+    "projectTitle": "项目题目",
+    "projectContent": "项目说明"
+    
+}
+```
+```json
+{
+    "status": 0, // 0-成功 1-权限不够 2-格式非法
+    "data": null
+}
+```
+
+##### 删除项目
+request
+
+```shell
+POST /api/project/delete
+```
+```json
+{
+    "userToken": "ae123asqere21asdsa3",
+    "projectId": 3,
+    
+}
+```
+```json
+{
+    "status": 0, // 0-成功 1-权限不够 2-格式非法
+    "data": null
+}
+```
 
 ##### 项目列表
 
