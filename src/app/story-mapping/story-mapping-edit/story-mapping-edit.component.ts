@@ -48,6 +48,7 @@ export class StoryMappingEditComponent implements OnInit {
     };
     this.projectService.currentProject.cards[this.currentCard.i].push(newCard);
     this.addCardModalVisible = false;
+    this.projectService.updateProject();
   }
 
   addCardCancel(): void {
@@ -59,6 +60,7 @@ export class StoryMappingEditComponent implements OnInit {
     console.log('Button ok clicked!');
     this.projectService.currentProject.cards[this.currentCard.i][this.currentCard.j].content = this.currentCard.content;
     this.editCardModalVisible = false;
+    this.projectService.updateProject();
   }
 
   editCardDelete(): void {

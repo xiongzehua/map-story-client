@@ -62,14 +62,9 @@ export class ProjectService {
       }
     );
     this.listProject();
-    this.updateProject();
   }
   getProject() {
-    console.log('getProject');
-    console.log(this.location.hash);
-    console.log('getProject');
     this.currentProjectId = this.location.hash.split('/').pop();
-
     const param = {
       userToken: this.userService.user.userToken,
       projectId: this.currentProjectId
@@ -83,10 +78,12 @@ export class ProjectService {
     this.http
       .post('/api/project/get', param, options).subscribe(
       (items: MyResponse) => {
-        console.log('/api/project/get');
-        console.log(items.data);
         this.currentProject = items.data;
-        this.currentProject.cards = JSON.parse(this.currentProject.projectCards);
+        if (this.currentProject.projectCards == null) {
+          this.currentProject.cards = [[]];
+        } else {
+          this.currentProject.cards = JSON.parse(this.currentProject.projectCards);
+        }
         console.log(this.currentProject);
       }
     );
