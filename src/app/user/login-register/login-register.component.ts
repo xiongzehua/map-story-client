@@ -29,7 +29,11 @@ export class LoginComponent implements OnInit {
   validateRegisterForm: FormGroup;
   showLogin = true;
 
-  user = new User(null, null, null);
+  user = {
+    userName: '',
+    userPassword: '',
+    userEmail: ''
+  };
 
   constructor(private fb: FormBuilder, private userService: UserService) { }
 
@@ -53,20 +57,28 @@ export class LoginComponent implements OnInit {
     } else if (control.value !== this.validateRegisterForm.controls.password.value) {
       return { confirm: true, error: true };
     }
-  };
-
-  toRegister():void {
+  }
+  toRegister(): void {
     this.showLogin = false;
+  }
+  signup() {
+    console.log('signup');
+    this.userService.signup(this.user);
+    console.log(this.userService.user);
+  }
+  signin() {
+    console.log('signin');
+    this.userService.signin(this.user);
   }
   submitLoginForm(): void {
     for (const i in this.validateLoginForm.controls) {
       this.validateLoginForm.controls[i].markAsDirty();
       this.validateLoginForm.controls[i].updateValueAndValidity();
     }
-    
+
     // request for logining using this.user.username and this.user.password
     // code here
-    
+
 
     this.userService.showLoginRegister = false;
     this.userService.isAnonymous = false;
@@ -74,6 +86,7 @@ export class LoginComponent implements OnInit {
 
   toLogin(): void {
     this.showLogin = true;
+
   }
   submitRegisterForm(): void {
     for (const i in this.validateRegisterForm.controls) {

@@ -12,20 +12,21 @@
   </div>
 </ul>
 
-<div *ngFor="let p of this.projectService.listProject();">
+<div *ngFor="let p of this.projectService.projects;">
   <div class="project">
-    <a routerLink="/storymapping/edit/{{p.id}}">{{p.name}}</a>
+    <a routerLink="/storymapping/edit/{{p.projectId}}">{{p.projectTitle}}</a>
   </div>
 </div>
 
 <button nz-button nzType="primary" (click)="showAddProjectModel()" style="margin-top: 15px">新建项目</button>
+<button nz-button nzType="primary" (click)="this.projectService.listProject();" style="margin-top: 15px">刷新列表</button>
 <nz-modal
   [(nzVisible)]="addProjectModelVisible"
   nzTitle="新建项目"
   [nzFooter]="addProjcetModalFooter"
   (nzOnCancel)="addProjcetCancel()"
   >
-  <input nz-input placeholder="项目名" [(ngModel)]="newProject.name">
+  <input nz-input placeholder="项目名" [(ngModel)]="newProject.projectTitle">
   <ng-template #addProjcetModalFooter>
     <button nz-button nzType="default" (click)="addProjcetCancel()">取消</button>
     <button nz-button nzType="primary" (click)="addProjcetOk()">保存</button>

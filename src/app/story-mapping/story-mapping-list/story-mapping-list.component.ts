@@ -10,7 +10,7 @@ import {Project} from '../../model/entities';
 export class StoryMappingListComponent implements OnInit {
   addProjectModelVisible = false;
   newProject: Project = {
-    name: '',
+    projectTitle: '',
     cards: [[]],
   };
   constructor(
@@ -18,11 +18,12 @@ export class StoryMappingListComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.projectService.listProject();
   }
 
   showAddProjectModel() {
     this.newProject = {
-      name: '',
+      projectTitle: '',
       cards: [[]],
     };
     this.addProjectModelVisible = true;

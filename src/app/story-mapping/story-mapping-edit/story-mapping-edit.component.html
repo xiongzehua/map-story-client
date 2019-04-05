@@ -7,23 +7,23 @@
             <a routerLink="/storymapping/list">maps</a>
           </nz-breadcrumb-item>
           <nz-breadcrumb-item>
-            <a >{{ projectService.getCurrentProject().name }}</a>
+            <a >{{ projectService.currentProject.projectTitle }}</a>
           </nz-breadcrumb-item>
         </nz-breadcrumb>
       </li>
     </div>
     <div nz-col nzSpan="2" nzOffset="12">
-      <li nz-menu-item routerLink="/storymapping/edit/{{ projectService.getCurrentProject().name }}"> 编辑</li>
+      <li nz-menu-item routerLink="/storymapping/edit/{{ projectService.currentProject.projectTitle }}"> 编辑</li>
     </div>
     <div nz-col nzSpan="2">
-      <li nz-menu-item routerLink="/storymapping/manage/{{ projectService.currentProject.id }}"> 管理</li>
+      <li nz-menu-item routerLink="/storymapping/manage/{{ projectService.currentProject.projectId }}"> 管理</li>
     </div>
   </div>
 </ul>
 
 
 
-<div *ngFor="let release of cards; let i = index;">
+<div *ngFor="let release of projectService.currentProject.cards; let i = index;">
   <div class="release">
     <!--版本分割线-->
     <nz-divider nzText="{{getReleaseInfo(i)}}"></nz-divider>

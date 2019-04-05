@@ -13,7 +13,7 @@ export const cards: Card[][] = [
 // 2 要不要每一次删除和修改都发请求，不过要每次都发请求那么双层数组的结构可能要修改
 // 3 双层数组数据库怎么保存
 export const storyMappings: Project[] = [
-  {id: 1, name: '项目1', cards: [
+  {projectId: '1', projectTitle: '项目1', cards: [
       [
         {content: 'card1'}, {content: 'card2'}, {content: 'card3'}, {content: 'card4'}
       ],
@@ -21,7 +21,7 @@ export const storyMappings: Project[] = [
         {content: 'card1'}, {content: 'card2'}, {content: 'card3'}, {content: 'card4'}
       ],
     ]},
-  {id: 2, name: '项目2', cards: [
+  {projectId: '2', projectTitle: '项目2', cards: [
       [
         {content: 'card1'}, {content: 'card2'}, {content: 'card3'}, {content: 'card4'}
       ],
@@ -29,7 +29,7 @@ export const storyMappings: Project[] = [
         {content: 'card1'}, {content: 'card2'}, {content: 'card3'}, {content: 'card4'}
       ],
     ]},
-  {id: 3, name: '项目3', cards: [
+  {projectId: '3', projectTitle: '项目3', cards: [
       [
         {content: 'card1'}, {content: 'card2'}, {content: 'card3'}, {content: 'card4'}
       ],
@@ -37,7 +37,7 @@ export const storyMappings: Project[] = [
         {content: 'card1'}, {content: 'card2'}, {content: 'card3'}, {content: 'card4'}
       ],
     ]},
-  {id: 4, name: '项目4', cards: [
+  {projectId: '4', projectTitle: '项目4', cards: [
       [
         {content: 'card1'}, {content: 'card2'}, {content: 'card3'}, {content: 'card4'}
       ],
@@ -48,7 +48,6 @@ export const storyMappings: Project[] = [
 ];
 
 export const user: User = {
-  id: 1,
-  username: 'admin',
-  password: '123456'
+  userName: 'admin',
+  userPassword: '123456'
 };

@@ -1,46 +1,115 @@
 import { Injectable } from '@angular/core';
 import {Observable, of} from 'rxjs';
-import {Card, Project} from '../model/entities';
+import {Card, MyResponse, Project} from '../model/entities';
 import {cards, storyMappings} from '../mock/mocks';
+import {HttpClient} from '@angular/common/http';
+import {UserService} from './user.service';
+import {PlatformLocation} from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectService {
-  public projects: Project[] = storyMappings;
+  constructor(private http: HttpClient, private userService: UserService, private location: PlatformLocation) { }
+  public projects: Project[];
   public cnt = 0;
-  public currentProject: Project = this.projects[0];
-  listProject(): Project[] {
-    return this.projects;
+  public currentProjectId: string;
+  public currentProject: Project = {
+    projectId: '',
+    projectTitle: '',
+    projectContent: '',
+    cards: [[]],
+    ownerEmail: '',
+    ownerId: '',
+    ownerName: '',
+    projectCards: '',
+  };
+  listProject() {
+    const param = {
+      userToken: this.userService.user.userToken,
+    };
+    const httpHeaders = {
+      'Authorization': 'my-auth-token',
+    };
+    const options = {
+      headers: httpHeaders,
+    }
+    this.http
+      .post('/api/project/list', param, options).subscribe(
+      (items: MyResponse) => {
+        console.log(this.projects);
+        this.projects = items['data'];
+      }
+    );
   }
   addProject(newProject: Project) {
-    newProject.id = this.projects[this.projects.length - 1].id + 1;
-    this.projects.push(newProject);
-  }
-  getProject(productId: number) {
-
-  }
-  getCurrentProject(): Project {
-    return this.currentProject;
-  }
-  updateProject(product: Project) {
-    // request请求
-
-    // 本地数据更新
-  }
-  setCurrentProject(productId: number) {
-    for (const p of this.projects) {
-      if (p.id === productId) {
-        this.currentProject = p;
-      }
+    const param = {
+      userToken: this.userService.user.userToken,
+      projectTitle: newProject.projectTitle,
+      projectContent: ''
+    };
+    const httpHeaders = {
+      'Authorization': 'my-auth-token',
+    };
+    const options = {
+      headers: httpHeaders,
     }
-  }
-  currentStoryMapping(storyMappingId: number): Observable<Project> {
-    for (const map of storyMappings) {
-      if (map.id === storyMappingId) {
-        return of(map);
+    this.http
+      .post('/api/project/create', param, options).subscribe(
+      (items: MyResponse) => {
+        this.currentProject = items.data;
+        this.currentProject.cards = items.data;
       }
+    );
+    this.listProject();
+    this.updateProject();
+  }
+  getProject() {
+    console.log('getProject');
+    console.log(this.location.hash);
+    console.log('getProject');
+    this.currentProjectId = this.location.hash.split('/').pop();
+
+    const param = {
+      userToken: this.userService.user.userToken,
+      projectId: this.currentProjectId
+    };
+    const httpHeaders = {
+      'Authorization': 'my-auth-token',
+    };
+    const options = {
+      headers: httpHeaders,
     }
+    this.http
+      .post('/api/project/get', param, options).subscribe(
+      (items: MyResponse) => {
+        console.log('/api/project/get');
+        console.log(items.data);
+        this.currentProject = items.data;
+        this.currentProject.cards = JSON.parse(this.currentProject.projectCards);
+        console.log(this.currentProject);
+      }
+    );
+  }
+  updateProject() {
+    const param = {
+      userToken: this.userService.user.userToken,
+      projectId: this.currentProjectId,
+      projectTitle: this.currentProject.projectTitle,
+      projectContent: this.currentProject.projectContent,
+      cards: JSON.stringify(this.currentProject.cards)
+    };
+    const httpHeaders = {
+      'Authorization': 'my-auth-token',
+    };
+    const options = {
+      headers: httpHeaders,
+    }
+    this.http
+      .post('/api/project/update', param, options).subscribe(
+      (items: MyResponse) => {
+      }
+    );
   }
 
   listStoryMapping(): Observable<Project[]> {
@@ -52,5 +121,4 @@ export class ProjectService {
   getCards(storyMappingId: number): Observable<Card[][]> {
     return of(cards);
   }
-  constructor() { }
 }

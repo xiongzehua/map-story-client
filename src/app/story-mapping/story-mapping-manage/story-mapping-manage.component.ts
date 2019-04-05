@@ -17,16 +17,7 @@ export class StoryMappingManageComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.setCurrentStoryMapping(+this.location.pathname.split("/").pop());
-  }
-
-  setCurrentStoryMapping(id: number): void {
-    this.storyMappingService.currentStoryMapping(id).subscribe(
-      mapping => {
-        console.log(mapping);
-        this.currentStoryMapping = mapping;
-      }
-    );
+    this.storyMappingService.currentProjectId = this.location.pathname.split('/').pop();
   }
 
 }

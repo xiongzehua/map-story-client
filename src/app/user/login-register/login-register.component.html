@@ -1,7 +1,7 @@
 <!-- 登录 -->
 <div *ngIf="showLogin" >
-  <form 
-    nz-form 
+  <form
+    nz-form
     [formGroup]="validateLoginForm"
     class="login-form"
     (ngSubmit)="submitLoginForm()">
@@ -34,7 +34,7 @@
           <span>记住我</span>
         </label>
         <a class="login-form-forgot" class="login-form-forgot">忘记密码</a>
-        <button nz-button class="login-form-button" [nzType]="'primary'">登录</button>
+        <button (click)="signin()" nz-button class="login-form-button" [nzType]="'primary'">登录</button>
         <a (click)="toRegister()">还没有账号，现在去注册</a>
       </nz-form-control>
     </nz-form-item>
@@ -43,8 +43,8 @@
 
 <!-- 注册 -->
 <div *ngIf="!showLogin" >
-  <form 
-    nz-form 
+  <form
+    nz-form
     [formGroup]="validateRegisterForm"
     class="login-form"
     (ngSubmit)="submitRegisterForm()">
@@ -88,7 +88,7 @@
     </nz-form-item>
     <nz-form-item>
       <nz-form-control>
-        <button nz-button class="login-form-button" [nzType]="'primary'">注册</button>
+        <button nz-button (click)="signup()" class="login-form-button" [nzType]="'primary'">注册</button>
         <a (click)="toLogin()">已有账号，现在去登录</a>
       </nz-form-control>
     </nz-form-item>

@@ -18,7 +18,7 @@ export class StoryMappingEditComponent implements OnInit {
     j: -1,
     content: '',
   };
-  cards: Card[][];
+  // cards: Card[][];
   constructor(
     public projectService: ProjectService,
     public location: PlatformLocation,
@@ -26,29 +26,18 @@ export class StoryMappingEditComponent implements OnInit {
    }
 
   ngOnInit() {
-    this.projectService.setCurrentProject(+this.location.pathname.split("/").pop());
-    this.cards = this.projectService.getCurrentProject().cards;
+    this.projectService.getProject();
   }
-
-  // setCurrentStoryMapping(id: number): void {
-  //   this.projectService.currentStoryMapping(id).subscribe(
-  //     mapping => {
-  //       console.log(mapping);
-  //       this.currentStoryMapping = mapping;
-  //     }
-  //   );
-  //   this.projectService.currentStoryMapping(id).
-  // }
 
   showEditCardModal(i: number, j: number): void {
     this.currentCard.i = i;
     this.currentCard.j = j;
-    this.currentCard.content = this.cards[i][j].content;
+    this.currentCard.content = this.projectService.currentProject.cards[i][j].content;
     this.editCardModalVisible = true;
   }
   showAddCardModal(i: number): void {
     this.currentCard.i = i;
-    this.currentCard.j = this.cards[i].length;
+    this.currentCard.j = this.projectService.currentProject.cards[i].length;
     this.currentCard.content = '';
     this.addCardModalVisible = true;
   }
@@ -57,7 +46,7 @@ export class StoryMappingEditComponent implements OnInit {
     const newCard = {
       content: this.currentCard.content,
     };
-    this.cards[this.currentCard.i].push(newCard);
+    this.projectService.currentProject.cards[this.currentCard.i].push(newCard);
     this.addCardModalVisible = false;
   }
 
@@ -68,13 +57,13 @@ export class StoryMappingEditComponent implements OnInit {
 
   editCardOk(): void {
     console.log('Button ok clicked!');
-    this.cards[this.currentCard.i][this.currentCard.j].content = this.currentCard.content;
+    this.projectService.currentProject.cards[this.currentCard.i][this.currentCard.j].content = this.currentCard.content;
     this.editCardModalVisible = false;
   }
 
   editCardDelete(): void {
     console.log('Button ok clicked!');
-    this.cards[this.currentCard.i].splice(this.currentCard.j, 1);
+    this.projectService.currentProject.cards[this.currentCard.i].splice(this.currentCard.j, 1);
     this.editCardModalVisible = false;
   }
 
@@ -99,6 +88,6 @@ export class StoryMappingEditComponent implements OnInit {
     return content;
   }
   addRelease() {
-    this.cards.push([]);
+    this.projectService.currentProject.cards.push([]);
   }
 }

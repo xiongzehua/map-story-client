@@ -1,7 +1,12 @@
 export class Project {
-  public id?: number;
-  public name: string;
-  public cards: Card[][];
+  public projectId?: string;
+  public projectTitle?: string;
+  public projectContent?: string;
+  public ownerId?: string;
+  public ownerEmail?: string;
+  public ownerName?: string;
+  public cards?: Card[][];
+  public projectCards?: string;
 }
 
 export class Card {
@@ -10,9 +15,14 @@ export class Card {
 }
 
 export class User {
-  constructor(
-    public id: number,
-    public username: String,
-    public password: String
-  ) {}
+  public id?: number;
+  public userName?: string;
+  public userPassword?: string;
+  public userEmail?: string;
+  public userToken?: string;
+}
+
+export class MyResponse {
+  public code?: number;
+  public data?: any;
 }
