@@ -8,16 +8,15 @@ import { ProjectService } from 'src/app/service/project.service';
   styleUrls: ['./story-mapping-manage.component.less']
 })
 export class StoryMappingManageComponent implements OnInit {
-
-  currentStoryMapping = null;
+  addEmail = '';
 
   constructor(
     private location: PlatformLocation,
-    private storyMappingService: ProjectService
+    private projectService: ProjectService
   ) { }
 
   ngOnInit() {
-    this.storyMappingService.currentProjectId = this.location.pathname.split('/').pop();
+
   }
 
 }

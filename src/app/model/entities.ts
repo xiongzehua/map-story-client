@@ -7,6 +7,7 @@ export class Project {
   public ownerName?: string;
   public cards?: Card[][];
   public projectCards?: string;
+  public contributors?: Contributor[];
 }
 
 export class Card {
@@ -15,11 +16,17 @@ export class Card {
 }
 
 export class User {
-  public id?: number;
+  public userId?: string;
   public userName?: string;
   public userPassword?: string;
   public userEmail?: string;
   public userToken?: string;
+}
+
+export class Contributor {
+  public contributorId?: string;
+  public contributorEmail?: string;
+  public contributorName?: string;
 }
 
 export class MyResponse {

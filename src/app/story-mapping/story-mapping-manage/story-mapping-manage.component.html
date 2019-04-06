@@ -2,29 +2,49 @@
   <div nz-row>
     <div nz-col nzSpan="8">
       <li nz-menu-item>
-
         <nz-breadcrumb style="line-height: 64px;">
           <nz-breadcrumb-item>
             <a routerLink="/storymapping/list">maps</a>
           </nz-breadcrumb-item>
           <nz-breadcrumb-item>
-            <a>{{ currentStoryMapping.name }}</a>
+            <a >{{ projectService.currentProject.projectTitle }}</a>
           </nz-breadcrumb-item>
         </nz-breadcrumb>
-
       </li>
     </div>
     <div nz-col nzSpan="2" nzOffset="12">
-      <li nz-menu-item routerLink="/storymapping/edit/{{ currentStoryMapping.id }}"> 编辑</li>
+      <li nz-menu-item routerLink="/storymapping/edit/{{ projectService.currentProject.projectId }}"> 编辑</li>
     </div>
     <div nz-col nzSpan="2">
-      <li nz-menu-item routerLink="/storymapping/manage/{{ currentStoryMapping.id }}"> 管理</li>
+      <li nz-menu-item routerLink="/storymapping/manage/{{ projectService.currentProject.projectId }}"> 管理</li>
     </div>
   </div>
 </ul>
 
 <div>
-  TODO
-  <li>添加协作者</li>
-  <li>删除协作者</li>
+  <!--版本分割线-->
+  <nz-divider nzText="添加协作者"></nz-divider>
+  <div nz-row>
+    <div nz-col nzSpan="12" nzOffset="4">
+      <input nz-input placeholder="协作者邮箱" [(ngModel)]="addEmail">
+    </div>
+    <div nz-col nzSpan="1" nzOffset="1">
+      <button nz-button nzType="primary" (click)="projectService.createContributor(addEmail)">添加</button>
+    </div>
+  </div>
+
+
+
+  <nz-divider nzText="当前协作者"></nz-divider>
+  <div *ngFor="let p of projectService.currentProject.contributors;">
+    <div nz-row>
+      <div nz-col nzSpan="12" nzOffset="4">
+
+        <input nz-input [(ngModel)]="p.contributorEmail + '  ' + p.contributorName">
+      </div>
+      <div nz-col nzSpan="1" nzOffset="1">
+        <button nz-button nzType="danger" (click)="projectService.deleteContributor(p.contributorId)">删除</button>
+      </div>
+    </div>
+  </div>
 </div>

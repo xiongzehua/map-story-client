@@ -109,13 +109,45 @@ export class ProjectService {
     );
   }
 
-  listStoryMapping(): Observable<Project[]> {
-    return of(storyMappings);
+  deleteContributor(id: String) {
+    const param = {
+      userToken: this.userService.user.userToken,
+      projectId: this.currentProjectId,
+      contributorId: id
+    };
+    const httpHeaders = {
+      'Authorization': 'my-auth-token',
+    };
+    const options = {
+      headers: httpHeaders,
+    }
+    this.http
+      .post('/api/contributor/delete', param, options).subscribe(
+        (items: MyResponse) => {
+          this.getProject();
+        }
+      );
   }
-  addStoryMapping(newProject: Project) {
-    storyMappings.push(newProject);
+
+  createContributor(email: String) {
+    const param = {
+      userToken: this.userService.user.userToken,
+      projectId: this.currentProjectId,
+      contributorEmail: email
+    };
+    const httpHeaders = {
+      'Authorization': 'my-auth-token',
+    };
+    const options = {
+      headers: httpHeaders,
+    }
+    this.http
+      .post('/api/contributor/create', param, options).subscribe(
+        (items: MyResponse) => {
+          this.getProject();
+        }
+      );
+
   }
-  getCards(storyMappingId: number): Observable<Card[][]> {
-    return of(cards);
-  }
+
 }
