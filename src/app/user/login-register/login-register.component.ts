@@ -63,9 +63,9 @@ export class LoginComponent implements OnInit {
     this.showLogin = false;
   }
   submitLoginForm(): void {
-    for (const control of this.validateLoginForm.controls) {
-      control.markAsDirty();
-      control.updateValueAndValidity();
+    for (const i in this.validateLoginForm.controls) {
+      this.validateLoginForm.controls[i].markAsDirty();
+      this.validateLoginForm.controls[i].updateValueAndValidity();
     }
 
     // request for logining using this.user.username and this.user.password
@@ -89,9 +89,9 @@ export class LoginComponent implements OnInit {
     this.showLogin = true;
   }
   submitRegisterForm(): void {
-    for (const control of this.validateRegisterForm.controls) {
-      control.markAsDirty();
-      control.updateValueAndValidity();
+    for (const i in this.validateRegisterForm.controls) {
+      this.validateRegisterForm.controls[i].markAsDirty();
+      this.validateRegisterForm.controls[i].updateValueAndValidity();
     }
     // request for registering using this.user.username and this.user.password
     // code here
