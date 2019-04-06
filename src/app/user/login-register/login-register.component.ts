@@ -7,10 +7,9 @@ import {
   FormControl
 } from '@angular/forms';
 import { NgModule } from '@angular/core';
-import { BrowserModule }  from '@angular/platform-browser';
+import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { UserService } from 'src/app/service/user.service';
-import { User } from 'src/app/model/entities';
 
 @Component({
   selector: 'app-login-register',

@@ -27,7 +27,6 @@ export class UserService {
     this.http
       .post('/api/signup', user, options).subscribe(
       (items: MyResponse) => {
-        console.log(items['data']);
         console.log(items.data);
         this.user = items['data'];
         console.log(this.user);
