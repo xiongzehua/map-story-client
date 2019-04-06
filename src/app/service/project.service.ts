@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Observable, of} from 'rxjs';
 import {Card, MyResponse, Project} from '../model/entities';
-import {cards, storyMappings} from '../mock/mocks';
 import {HttpClient} from '@angular/common/http';
 import {UserService} from './user.service';
 import {PlatformLocation} from '@angular/common';
@@ -33,7 +31,7 @@ export class ProjectService {
     };
     const options = {
       headers: httpHeaders,
-    }
+    };
     this.http
       .post('/api/project/list', param, options).subscribe(
       (items: MyResponse) => {
@@ -53,7 +51,7 @@ export class ProjectService {
     };
     const options = {
       headers: httpHeaders,
-    }
+    };
     this.http
       .post('/api/project/create', param, options).subscribe(
       (items: MyResponse) => {
@@ -74,7 +72,7 @@ export class ProjectService {
     };
     const options = {
       headers: httpHeaders,
-    }
+    };
     this.http
       .post('/api/project/get', param, options).subscribe(
       (items: MyResponse) => {
@@ -101,7 +99,7 @@ export class ProjectService {
     };
     const options = {
       headers: httpHeaders,
-    }
+    };
     this.http
       .post('/api/project/update', param, options).subscribe(
       (items: MyResponse) => {
@@ -120,7 +118,7 @@ export class ProjectService {
     };
     const options = {
       headers: httpHeaders,
-    }
+    };
     this.http
       .post('/api/contributor/delete', param, options).subscribe(
         (items: MyResponse) => {
@@ -140,7 +138,7 @@ export class ProjectService {
     };
     const options = {
       headers: httpHeaders,
-    }
+    };
     this.http
       .post('/api/contributor/create', param, options).subscribe(
         (items: MyResponse) => {

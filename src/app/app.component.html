@@ -6,7 +6,7 @@
         <li nz-menu-item routerLink="">Map</li>
       </div>
       <div *ngIf="!this.userService.isAnonymous" nz-col nzOffset="20" nzSpan="2" >
-        <li nz-menu-item routerLink="/user">个人中心</li>
+        <li nz-menu-item (click)="logout()">退出登录</li>
       </div>
       <div *ngIf="this.userService.isAnonymous" nz-col nzOffset="20" nzSpan="2">
         <li nz-menu-item (click)="showLoginModal()">登陆/注册</li>
@@ -22,9 +22,9 @@
 <nz-modal
   [(nzVisible)]="this.userService.showLoginRegister"
   nzWrapClassName="vertical-center-modal"
-  [nzTitle]="loginModalTitle" 
+  [nzTitle]="loginModalTitle"
   [nzContent]="loginModalContent"
-  [nzFooter]="null" 
+  [nzFooter]="null"
   (nzOnCancel)="loginCancel()">
   <ng-template #loginModalTitle>
     注册/登录
@@ -33,5 +33,5 @@
   <ng-template #loginModalContent>
     <app-login-register></app-login-register>
   </ng-template>
-  
+
 </nz-modal>

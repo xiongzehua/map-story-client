@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {MyResponse, Project, User} from '../model/entities';
 import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,44 +13,31 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  signup(user: User) {
-    user = {
-      userEmail: 'test4@nju.com',
-      userPassword: 'qwe123',
-      userName: '测试用户'
-    };
+  signup(user: User): Observable<Object> {
+    // user = {
+    //   userEmail: 'test4@nju.com',
+    //   userPassword: 'qwe123',
+    //   userName: '测试用户'
+    // };
     const httpHeaders = {
       'Authorization': 'my-auth-token',
     };
     const options = {
       headers: httpHeaders,
-    }
-    this.http
-      .post('/api/signup', user, options).subscribe(
-      (items: MyResponse) => {
-        console.log(items.data);
-        this.user = items['data'];
-        console.log(this.user);
-      }
-    );
+    };
+    return this.http.post('/api/signup', user, options);
   }
-  signin(user: User) {
-    user = {
-      userEmail: 'test1@nju.com',
-      userPassword: 'qwe123'
+  signin(user: User): Observable<Object> {
+    const loginingUser = {
+      userEmail: user.userEmail,
+      userPassword: user.userPassword
     };
     const httpHeaders = {
       'Authorization': 'my-auth-token',
     };
     const options = {
       headers: httpHeaders,
-    }
-    this.http
-      .post('/api/signin', user, options).subscribe(
-      (items: MyResponse) => {
-        this.user = items['data'];
-        console.log(this.user);
-      }
-    );
+    };
+    return this.http.post('/api/signin', loginingUser, options);
   }
 }

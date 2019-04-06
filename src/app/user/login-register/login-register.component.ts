@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  AbstractControl,
   FormBuilder,
   FormGroup,
   Validators,
@@ -10,6 +9,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { UserService } from 'src/app/service/user.service';
+import {MyResponse} from '../../model/entities';
+import {ProjectService} from '../../service/project.service';
 
 @Component({
   selector: 'app-login-register',
@@ -34,70 +35,76 @@ export class LoginComponent implements OnInit {
     userEmail: ''
   };
 
-  constructor(private fb: FormBuilder, private userService: UserService) { }
+  constructor(private fb: FormBuilder, private userService: UserService, private projectService: ProjectService) { }
 
   ngOnInit() {
     this.validateLoginForm = this.fb.group({
-      username: [null, [ Validators.required ]],
-      password: [null, [ Validators.required ]],
+      userEmail: [null, [ Validators.email, Validators.required ]],
+      userPassword: [null, [ Validators.required ]],
       remember: [true]
     });
 
     this.validateRegisterForm = this.fb.group({
-      username: [null, [ Validators.required ]],
-      password: [null, [ Validators.required ]],
+      userName: [null, [ Validators.required ]],
+      userEmail: [null, [ Validators.email, Validators.required ]],
+      userPassword: [null, [ Validators.required ]],
       checkPassword: [null, [Validators.required, this.confirmationValidator]]
-    })
+    });
   }
 
   confirmationValidator = (control: FormControl): { [ s: string ]: boolean } => {
     if (!control.value) {
       return { required: true };
-    } else if (control.value !== this.validateRegisterForm.controls.password.value) {
+    } else if (control.value !== this.validateRegisterForm.controls.userPassword.value) {
       return { confirm: true, error: true };
     }
   }
   toRegister(): void {
     this.showLogin = false;
   }
-  signup() {
-    console.log('signup');
-    this.userService.signup(this.user);
-    console.log(this.userService.user);
-  }
-  signin() {
-    console.log('signin');
-    this.userService.signin(this.user);
-  }
   submitLoginForm(): void {
-    for (const i in this.validateLoginForm.controls) {
-      this.validateLoginForm.controls[i].markAsDirty();
-      this.validateLoginForm.controls[i].updateValueAndValidity();
+    for (const control of this.validateLoginForm.controls) {
+      control.markAsDirty();
+      control.updateValueAndValidity();
     }
 
     // request for logining using this.user.username and this.user.password
     // code here
+    this.userService.signin(this.user).subscribe(
+      (items: MyResponse) => {
+        this.userService.user = items['data'];
+        if (items['status'] === 0) {
+          this.userService.showLoginRegister = false;
+          this.userService.isAnonymous = false;
 
-
-    this.userService.showLoginRegister = false;
-    this.userService.isAnonymous = false;
+          this.projectService.listProject();
+        } else {
+          alert('登录失败');
+        }
+      }
+    );
   }
 
   toLogin(): void {
     this.showLogin = true;
-
   }
   submitRegisterForm(): void {
-    for (const i in this.validateRegisterForm.controls) {
-      this.validateRegisterForm.controls[i].markAsDirty();
-      this.validateRegisterForm.controls[i].updateValueAndValidity();
+    for (const control of this.validateRegisterForm.controls) {
+      control.markAsDirty();
+      control.updateValueAndValidity();
     }
-
     // request for registering using this.user.username and this.user.password
     // code here
-
-
-    this.showLogin = true;
+    this.userService.signup(this.user).subscribe(
+      (items: MyResponse) => {
+        this.userService.user = items['data'];
+        if (items['status'] === 0) {
+          this.showLogin = true;
+        } else {
+          alert('注册失败');
+        }
+      }
+    );
   }
 
 }

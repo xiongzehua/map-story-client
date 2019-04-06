@@ -8,21 +8,21 @@
     <nz-form-item>
       <nz-form-control>
         <nz-input-group [nzPrefix]="prefixUser">
-          <input type="text" nz-input id="username" formControlName="username" placeholder="用户名" [(ngModel)]="this.user.username" name="username">
+          <input type="text" id="userEmail" nz-input formControlName="userEmail" placeholder="用户邮箱" [(ngModel)]="this.user.userEmail" name="userEmail">
         </nz-input-group>
-        <nz-form-explain *ngIf="validateLoginForm.get('username').dirty && validateLoginForm.get('username').errors">请输入正确的用户名！</nz-form-explain>
+        <nz-form-explain *ngIf="validateLoginForm.get('userEmail').dirty && validateLoginForm.get('userEmail').errors">请输入正确的邮箱地址！</nz-form-explain>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-control>
         <nz-input-group [nzPrefix]="prefixLock">
-          <input type="password" nz-input id="password" formControlName="password" placeholder="密码" minlength="6" [(ngModel)]="this.user.password" name="password">
+          <input type="password" id="userPassword" nz-input formControlName="userPassword" placeholder="密码" minlength="6" [(ngModel)]="this.user.userPassword" name="userPassword">
         </nz-input-group>
-        <nz-form-explain *ngIf="validateLoginForm.get('password').dirty && validateLoginForm.get('password').errors">
-          <ng-container *ngIf="validateLoginForm.get('password').hasError('required')">
+        <nz-form-explain *ngIf="validateLoginForm.get('userPassword').dirty && validateLoginForm.get('userPassword').errors">
+          <ng-container *ngIf="validateLoginForm.get('userPassword').hasError('required')">
             请输入正确的密码！
           </ng-container>
-          <ng-container *ngIf="validateLoginForm.get('password').hasError('minlength')">
+          <ng-container *ngIf="validateLoginForm.get('userPassword').hasError('minlength')">
             密码最少6个字符
           </ng-container>
         </nz-form-explain>
@@ -34,7 +34,7 @@
           <span>记住我</span>
         </label>
         <a class="login-form-forgot" class="login-form-forgot">忘记密码</a>
-        <button (click)="signin()" nz-button class="login-form-button" [nzType]="'primary'">登录</button>
+        <button nz-button class="login-form-button" [nzType]="'primary'">登录</button>
         <a (click)="toRegister()">还没有账号，现在去注册</a>
       </nz-form-control>
     </nz-form-item>
@@ -51,21 +51,29 @@
     <nz-form-item>
       <nz-form-control>
         <nz-input-group [nzPrefix]="prefixUser">
-          <input type="text" nz-input id="username" formControlName="username" placeholder="用户名" [(ngModel)]="this.user.username" name="username">
+          <input type="text" nz-input id="userName" formControlName="userName" placeholder="用户名" [(ngModel)]="this.user.userName" name="userName">
         </nz-input-group>
-        <nz-form-explain *ngIf="validateRegisterForm.get('username').dirty && validateRegisterForm.get('username').errors">请输入正确的用户名！</nz-form-explain>
+        <nz-form-explain *ngIf="validateRegisterForm.get('userName').dirty && validateRegisterForm.get('userName').errors">请输入正确的用户名！</nz-form-explain>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control>
+        <nz-input-group [nzPrefix]="prefixUser">
+          <input type="text" nz-input id="userEmail" formControlName="userEmail" placeholder="用户邮箱" [(ngModel)]="this.user.userEmail" name="userEmail">
+        </nz-input-group>
+        <nz-form-explain *ngIf="validateRegisterForm.get('userEmail').dirty && validateRegisterForm.get('userEmail').errors">请输入正确的邮箱地址！</nz-form-explain>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-control>
         <nz-input-group [nzPrefix]="prefixLock">
-          <input type="password" nz-input id="password" formControlName="password" placeholder="密码" minlength="6" [(ngModel)]="this.user.password" name="password">
+          <input type="password" nz-input id="userPassword" formControlName="userPassword" placeholder="密码" minlength="6" [(ngModel)]="this.user.userPassword" name="userPassword">
         </nz-input-group>
-        <nz-form-explain *ngIf="validateRegisterForm.get('password').dirty && validateRegisterForm.get('password').errors">
-          <ng-container *ngIf="validateRegisterForm.get('password').hasError('required')">
+        <nz-form-explain *ngIf="validateRegisterForm.get('userPassword').dirty && validateRegisterForm.get('userPassword').errors">
+          <ng-container *ngIf="validateRegisterForm.get('userPassword').hasError('required')">
             请输入正确的密码！
           </ng-container>
-          <ng-container *ngIf="validateRegisterForm.get('password').hasError('minlength')">
+          <ng-container *ngIf="validateRegisterForm.get('userPassword').hasError('minlength')">
             密码最少6个字符
           </ng-container>
         </nz-form-explain>
@@ -88,7 +96,7 @@
     </nz-form-item>
     <nz-form-item>
       <nz-form-control>
-        <button nz-button (click)="signup()" class="login-form-button" [nzType]="'primary'">注册</button>
+        <button nz-button class="login-form-button" [nzType]="'primary'">注册</button>
         <a (click)="toLogin()">已有账号，现在去登录</a>
       </nz-form-control>
     </nz-form-item>
